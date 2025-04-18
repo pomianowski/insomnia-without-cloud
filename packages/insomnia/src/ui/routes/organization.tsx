@@ -525,65 +525,6 @@ const NetworkAndSyncIndicator = ({ user, asyncTaskStatus, settings, sync }: Indi
 
   return (
     <>
-      {/* The sync indicator only show when network status is online */}
-      {/* use for show sync organization and projects status(1. first enter app 2. switch organization) */}
-      {status === 'online' && asyncTaskStatus !== 'idle' ? (
-        <TooltipTrigger>
-          <Button
-            className="flex h-full items-center justify-center gap-1 px-4 py-1 text-xs text-[--color-font] ring-1 ring-transparent transition-all hover:bg-[--hl-xs] focus:ring-inset focus:ring-[--hl-md] aria-pressed:bg-[--hl-sm]"
-            onPress={() => {
-              asyncTaskStatus === 'error' && sync();
-            }}
-          >
-            <Icon
-              icon={asyncTaskStatus !== 'error' ? 'spinner' : 'circle'}
-              className={`${asyncTaskStatus === 'error' ? 'text-[--color-danger]' : 'text-[--color-font]'} w-5 ${asyncTaskStatus !== 'error' ? 'animate-spin' : ''}`}
-            />
-            {asyncTaskStatus !== 'error' ? 'Syncing' : 'Sync error: click to retry'}
-          </Button>
-          <Tooltip
-            placement="top"
-            offset={8}
-            className="flex max-h-[85vh] min-w-max select-none items-center gap-2 overflow-y-auto rounded-md border border-solid border-[--hl-sm] bg-[--color-bg] px-4 py-2 text-sm text-[--color-font] shadow-lg focus:outline-none"
-          >
-            {asyncTaskStatus !== 'error' ? 'Syncing' : 'Sync error: click to retry'}
-          </Tooltip>
-        </TooltipTrigger>
-      ) : (
-        <TooltipTrigger>
-          <Button
-            className="flex h-full items-center justify-center gap-1 px-4 py-1 text-xs text-[--color-font] ring-1 ring-transparent transition-all hover:bg-[--hl-xs] focus:ring-inset focus:ring-[--hl-md] aria-pressed:bg-[--hl-sm]"
-            onPress={() => {
-              !user && navigate('/auth/login');
-              if (settings.proxyEnabled) {
-                showSettingsModal({
-                  tab: 'proxy',
-                });
-              }
-            }}
-          >
-            <Icon
-              icon="circle"
-              className={user ? (status === 'online' ? 'text-[--color-success]' : 'text-[--color-danger]') : ''}
-            />{' '}
-            {user ? status.charAt(0).toUpperCase() + status.slice(1) : 'Log in to see your projects'}
-            {status === 'online' && settings.proxyEnabled ? ' via proxy' : ''}
-          </Button>
-          <Tooltip
-            placement="top"
-            offset={8}
-            className="flex max-h-[85vh] min-w-max select-none items-center gap-2 overflow-y-auto rounded-md border border-solid border-[--hl-sm] bg-[--color-bg] px-4 py-2 text-sm text-[--color-font] shadow-lg focus:outline-none"
-          >
-            {user
-              ? status === 'online'
-                ? 'You have connectivity to the Internet' +
-                  (settings.proxyEnabled ? ' via the configured proxy' : '') +
-                  '.'
-                : 'You are offline. Connect to sync your data.'
-              : 'Log in to Insomnia to unlock the full product experience.'}
-          </Tooltip>
-        </TooltipTrigger>
-      )}
     </>
   );
 };
