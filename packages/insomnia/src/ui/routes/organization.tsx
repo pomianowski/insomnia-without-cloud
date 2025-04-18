@@ -693,30 +693,6 @@ const OrganizationRoute = () => {
                   {!user ? <GitHubStarsButton /> : null}
                 </div>
                 <CommandPalette />
-                <div className="flex items-center justify-end gap-[--padding-sm] p-2">
-                  {user ? (
-                    <Fragment>
-                      <PresentUsers />
-                      <HeaderInviteButton className="border border-solid border-[--hl-md] bg-[rgba(var(--color-surprise-rgb),var(--tw-bg-opacity))] bg-opacity-100 font-semibold text-[--color-font-surprise]" />
-                      <HeaderUserButton user={user} currentPlan={currentPlan} isMinimal={isMinimal} />
-                    </Fragment>
-                  ) : (
-                    <Fragment>
-                      <NavLink
-                        to="/auth/login"
-                        className="flex items-center justify-center gap-2 rounded-sm border border-solid border-[--hl-md] px-4 py-1 text-sm font-semibold text-[--color-font] ring-1 ring-transparent transition-all hover:bg-[--hl-xs] focus:ring-inset focus:ring-[--hl-md] aria-pressed:bg-[--hl-sm]"
-                      >
-                        Login
-                      </NavLink>
-                      <NavLink
-                        className="flex items-center justify-center gap-2 rounded-sm bg-[--color-surprise] px-4 py-1 text-sm font-semibold text-[--color-font-surprise] ring-1 ring-transparent transition-all focus:bg-[rgba(var(--color-surprise-rgb),0.9)] focus:ring-inset focus:ring-[--hl-md] aria-pressed:bg-[rgba(var(--color-surprise-rgb),0.8)]"
-                        to="/auth/login"
-                      >
-                        Sign up for free
-                      </NavLink>
-                    </Fragment>
-                  )}
-                </div>
               </header>
             )}
             {isScratchPadBannerVisible ? (
